@@ -8,6 +8,7 @@ import processing.core.PGraphics;
 
 public class changeSystem {
 	public ArrayList<image> changes=new ArrayList<>();
+	public ArrayList<image> next=new ArrayList<>();
 	int height,width;
 	int selected=0;
 	public changeSystem(int w,int h) {

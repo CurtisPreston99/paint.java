@@ -1,12 +1,16 @@
 package colorSelect;
 
 import controlP5.ControlP5;
+
+import javax.swing.WindowConstants;
+
 import controlP5.*;
 import processing.core.PApplet;
+import main.SecondaryWindows;
 import main.globals;
 
 
-public class colorPlane extends PApplet {
+public class colorPlane extends SecondaryWindows {
 	ControlP5 cp5;
 	colorWheel Wheel;
 	int wheelX=62;
@@ -19,6 +23,7 @@ public class colorPlane extends PApplet {
 	public void draw() {
 		background(255);
 		surface.setAlwaysOnTop(true);
+		
 		textMode(CENTER);
 		fill(0);
 		text("RGB",320,20);
@@ -72,6 +77,7 @@ public class colorPlane extends PApplet {
 		surface.setLocation(10, 10);
 		//setting up gui
 		cp5=new ControlP5(this);
+		
 		
 		cp5.addButton("swapColors")
 		.setPosition(50,40)
@@ -370,9 +376,9 @@ public class colorPlane extends PApplet {
 	}
 
 	
-	//on close exit
-	public void close() {
-		exit();
-	}
+//	public void exit()
+//	  {
+//	    dispose();
+//	  }
 	
 }

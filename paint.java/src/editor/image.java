@@ -64,8 +64,13 @@ public class image {
 	public image copy() {
 		image i = new image(width,height);
 		
-		for(layer l:layers) {
-			i.addLayer(new layer(l.image));
+//		for(layer l:layers) {
+		for(int e=0;e<layers.size();e++) {
+			i.addLayer();
+			layer tmp= i.getLayer(e);
+			tmp.image.beginDraw();
+			tmp.image.image(getLayer(e).image,0,0);
+			tmp.image.endDraw();
 		}
 		
 		return i;
@@ -82,6 +87,11 @@ public class image {
 	public layer getLayer() {
 		
 		return layers.get(selectedLayer);
+	}
+	
+	public layer getLayer(int i) {
+		
+		return layers.get(i);
 	}
 	
 	public void updateLayer(layer l) {

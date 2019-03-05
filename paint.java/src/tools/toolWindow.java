@@ -2,10 +2,11 @@ package tools;
 
 import java.util.ArrayList;
 
+import main.SecondaryWindows;
 import main.globals;
 import processing.core.PApplet;
 
-public class toolWindow extends PApplet{
+public class toolWindow extends SecondaryWindows{
 	ArrayList<tool> tools=new ArrayList<>();
 	toolSys System=toolSys.getSystem();
 	

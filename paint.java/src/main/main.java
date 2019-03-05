@@ -32,7 +32,7 @@ public class main extends PApplet{
     	PApplet.runSketch(args, new colorPlane());
     	global.selectedColor=color(255,255,255);
     	global.secondaryColor=color(255,255,255);
-//		surface.setResizable(true);
+		surface.setResizable(true);
     	image=new changeSystem(640,480);
 		global.selectedlayer=image.changes.get(0).layers.get(0);
 		global.selectedlayerN=0;
