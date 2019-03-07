@@ -42,11 +42,10 @@ public class layer {
 		image.loadPixels();
 		layer cl=new layer(image.width,image.height);
 		PGraphics pg = global.window.createGraphics(image.width, image.height);
-		getImage().save("b4.png");
+
 		cl.getImage().loadPixels();
 		PApplet.arrayCopy(getImage().pixels, cl.getImage().pixels);
 		cl.getImage().updatePixels();
-		cl.getImage().save("after.png");
 		return cl;
 		
 	}
