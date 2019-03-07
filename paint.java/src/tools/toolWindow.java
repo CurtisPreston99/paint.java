@@ -27,6 +27,7 @@ public class toolWindow extends SecondaryWindows{
 	}
 	
 	public void draw() {
+		onTopCheck();
 		image(tools.get(0).icon,0,0);
 		image(tools.get(1).icon,0,20);
 		

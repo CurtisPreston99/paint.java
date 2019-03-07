@@ -21,8 +21,9 @@ public class colorPlane extends SecondaryWindows {
 	
 	
 	public void draw() {
+		onTopCheck();
 		background(255);
-		surface.setAlwaysOnTop(true);
+		
 		
 		textMode(CENTER);
 		fill(0);

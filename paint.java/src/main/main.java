@@ -1,5 +1,6 @@
 package main;
 
+
 import colorSelect.colorPlane;
 import controlP5.FrameRate;
 import processing.core.PApplet;
@@ -8,6 +9,7 @@ import tools.toolWindow;
 import processing.core.*;
 import editor.changeSystem;
 import editor.image;
+import layerWindow.layerSelector;
 
 public class main extends PApplet{
 	globals global=globals.getInstance();
@@ -38,11 +40,14 @@ public class main extends PApplet{
 		global.selectedImage=image;
     	PApplet.runSketch(args, new toolWindow());
     	
+    	PApplet.runSketch(args, new layerSelector());
     	
-
+    	
     }
 
     public void draw(){
+    	global.SecondaryOnTop=focused;
+    	
 //    	System.out.println(frameRate);
     	background(global.selectedColor);
     	fill(global.secondaryColor);

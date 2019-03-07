@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 public class globals {
 	static globals singilton = new globals();
-	
+	public Boolean SecondaryOnTop = false;
 	public PApplet window;
 	public int selectedColor;
 	public int secondaryColor;

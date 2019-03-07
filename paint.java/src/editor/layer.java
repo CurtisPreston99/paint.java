@@ -9,7 +9,7 @@ public class layer {
 	PGraphics image;
 	globals global=globals.getInstance();
 	
-	public layer(int w,int h) {
+	public layer(int w,int h) {	
 //		PApplet p = global.window;
 		image= global.window.createGraphics(w, h);
 		image.beginDraw();

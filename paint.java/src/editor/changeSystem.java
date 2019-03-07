@@ -35,11 +35,12 @@ public class changeSystem {
 		image t=new image(current);
 		previous.add(current);
 		current=t;
+		next=new ArrayList<>();
 		updateGlobal();
 	}
 	
 	public void undo() {
-		if(previous.size()>1) {
+		if(previous.size()>0) {
 			image newc= previous.get(previous.size()-1);
 			next.add(current);
 			current=newc;
@@ -49,7 +50,7 @@ public class changeSystem {
 	}
 	
 	public void redo() {
-		if(next.size()>1) {
+		if(next.size()>0) {
 			image newc= next.get(next.size()-1);
 			previous.add(current);
 			current=newc;
