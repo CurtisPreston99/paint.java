@@ -37,14 +37,18 @@ public class layer {
 	
 	
 	@Override
-	protected layer clone() {
+	protected layer clone() {//make new layer and copy image from this layer to that one and then return the new layer
 		image.flush();
 		image.loadPixels();
 		layer cl=new layer(image.width,image.height);
-		cl.image.loadPixels(); 
-		cl.image.image(image, 0, 0);
-		cl.image.updatePixels();
+		PGraphics pg = global.window.createGraphics(image.width, image.height);
+		getImage().save("b4.png");
+		cl.getImage().loadPixels();
+		PApplet.arrayCopy(getImage().pixels, cl.getImage().pixels);
+		cl.getImage().updatePixels();
+		cl.getImage().save("after.png");
 		return cl;
+		
 	}
 
 

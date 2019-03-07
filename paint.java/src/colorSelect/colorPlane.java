@@ -75,6 +75,7 @@ public class colorPlane extends SecondaryWindows {
 	public void setup() {
 		frameRate(15);
 		surface.setLocation(10, 10);
+		
 		//setting up gui
 		cp5=new ControlP5(this);
 		

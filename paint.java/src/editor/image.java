@@ -18,9 +18,6 @@ public class image {
 		width=w;
 		height=h;
 		layer first=new layer(w, h);
-		first.image.beginDraw();
-		first.image.background(255);
-		first.image.endDraw();
 		layers.add(first);
 	}
 	
@@ -28,7 +25,7 @@ public class image {
 		width=cp.width;
 		height=cp.height;
 		selectedLayer=cp.selectedLayer;
-		for(layer l:layers) {
+		for(layer l:cp.layers) {
 			layers.add(l.clone());
 		}
 	}
@@ -71,8 +68,8 @@ public class image {
 			tmp.image.beginDraw();
 			tmp.image.image(getLayer(e).image,0,0);
 			tmp.image.endDraw();
+			i.layers.set(e, tmp);
 		}
-		
 		return i;
 	}
 	

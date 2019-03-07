@@ -7,56 +7,65 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 
 public class changeSystem {
-	public ArrayList<image> changes=new ArrayList<>();
+	public ArrayList<image> previous=new ArrayList<>();
 	public ArrayList<image> next=new ArrayList<>();
+	public image current;
 	int height,width;
 	int selected=0;
 	public changeSystem(int w,int h) {
 		height=h;
 		width=w;
 		image i=new image(w,h);
-		changes.add(i);
+//		previous.add(i);
+		current = i;
 		globals.getInstance().selectedImg=i;
+		updateGlobal();
 	}
 	
 	
 	public void updateGlobal() {
-//		globals.getInstance().selectedlayer=changes.get(selected).layers.get(0);
-		globals.getInstance().selectedImg=changes.get(selected);
+		globals.getInstance().selectedImg=current;
+		globals.getInstance().selectedlayer=current.getLayer();
+
 	}
 	
-	
+	//make next image then add current to the previous array
 	public void next() {
 
-		image t=changes.get(selected).copy();
-		changes.add(t);
-		selected++;
+		image t=new image(current);
+		previous.add(current);
+		current=t;
 		updateGlobal();
 	}
 	
 	public void undo() {
-		selected--;
-		if(selected<0) {
-			selected=0;
+		if(previous.size()>1) {
+			image newc= previous.get(previous.size()-1);
+			next.add(current);
+			current=newc;
+			previous.remove(previous.size()-1);
 		}
 		updateGlobal();
 	}
 	
 	public void redo() {
-		selected++;
-		if(selected>changes.size()-1) {
-			selected=changes.size()-1;
+		if(next.size()>1) {
+			image newc= next.get(next.size()-1);
+			previous.add(current);
+			current=newc;
+			next.remove(next.size()-1);
 		}
+		
 		updateGlobal();
 	}
 	
 	public image getSelectedImage() {
-		return changes.get(selected);
+		return current;
 		
 	}
 	
 	public PGraphics getPic(PApplet c) {
-		return changes.get(selected).getPic(c);
+		return current.getPic(c);
 	}
 	
 	

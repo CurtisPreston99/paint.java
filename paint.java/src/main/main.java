@@ -26,7 +26,7 @@ public class main extends PApplet{
     }
 
     public void setup(){
-    	frameRate(240);
+    	frameRate(10);
     	global.window=this;
     	String[] args= {"color"};
     	PApplet.runSketch(args, new colorPlane());
@@ -34,7 +34,6 @@ public class main extends PApplet{
     	global.secondaryColor=color(255,255,255);
 		surface.setResizable(true);
     	image=new changeSystem(640,480);
-		global.selectedlayer=image.changes.get(0).layers.get(0);
 		global.selectedlayerN=0;
 		global.selectedImage=image;
     	PApplet.runSketch(args, new toolWindow());
@@ -71,24 +70,29 @@ public class main extends PApplet{
     
     public void mousePressed() {
 //    	image=new changeSystem(image);
+    	frameRate(250);
 
     }
     
     public void mouseReleased() {
     	drag=false;
     	image.next();
+    	frameRate(10);
+
     }
     
     
-    public void keyPressed() {
+    public void keyPressed(){
     	System.out.println(key);
     	
     	switch (key) {
     	case 'z':
     		image.undo();
+    		break;
     		
     	case 'r':
     		image.redo();
+    		break;
     	}
     }
 }
