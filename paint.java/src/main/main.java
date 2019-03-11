@@ -1,6 +1,9 @@
 package main;
 
 
+import java.awt.FileDialog;
+import java.io.File;
+
 import colorSelect.colorPlane;
 import controlP5.FrameRate;
 import processing.core.PApplet;
@@ -73,18 +76,16 @@ public class main extends PApplet{
     	}
     }
     
-    
+    //if mouse pressed ramp up fps for smother drawing 
     public void mousePressed() {
-//    	image=new changeSystem(image);
     	frameRate(250);
-
     }
     
+    //turn of drag, start next in change system, slow down fps for battery saving
     public void mouseReleased() {
     	drag=false;
     	image.next();
     	frameRate(10);
-
     }
     
     
@@ -99,6 +100,15 @@ public class main extends PApplet{
     	case '':
     		image.redo();
     		break;
+    	
+    	case 's':
+//    		image.getPic(this).save("saved.png");
+//    		saveCurrentPng();  todo
     	}
+    	
+    	
     }
+  
+    
+	
 }

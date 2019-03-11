@@ -9,8 +9,18 @@ public class layer {
 	PGraphics image;
 	globals global=globals.getInstance();
 	String layerName="";
+	Boolean visible=true;
 	
-	
+	public Boolean getVisible() {
+		return visible;
+	}
+
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
+
+
 	public String getLayerName() {
 		return layerName;
 	}
@@ -53,6 +63,7 @@ public class layer {
 		image.flush();
 		image.loadPixels();
 		layer cl=new layer(image.width,image.height);
+		cl.setLayerName(getLayerName());
 		PGraphics pg = global.window.createGraphics(image.width, image.height);
 
 		cl.getImage().loadPixels();

@@ -43,6 +43,7 @@ public class image {
 	
 	public void addLayer() {
 		layer l = new layer(width,height);
+		l.setLayerName("layer "+String.valueOf(layers.size()));
 		//make layer transparent rather than white
 		l.getImage().beginDraw();
 		l.getImage().background(0,0);
@@ -59,7 +60,9 @@ public class image {
 		PGraphics pic= globals.getInstance().window.createGraphics(width, height);
 		pic.beginDraw();
 		for(layer l:layers) {
-			pic.image(l.image, 0, 0);
+			if(l.visible) {
+				pic.image(l.image, 0, 0);
+			}
 		}
 		pic.endDraw();
 		return pic;

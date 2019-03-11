@@ -6,13 +6,14 @@ public class SecondaryWindows extends PApplet {
 	
 	
 	public Boolean onTopCheck() {
-		surface.setAlwaysOnTop(globals.getInstance().SecondaryOnTop);
-		if(globals.getInstance().SecondaryOnTop) {
+		Boolean focus=globals.getInstance().SecondaryOnTop||focused;
+		surface.setAlwaysOnTop(focus);
+		if(focus) {
 			frameRate(60);
 		}else {
-			frameRate(1);
+			frameRate(10);
 		}
-		return globals.getInstance().SecondaryOnTop;
+		return focus;
 	}
 	
 	

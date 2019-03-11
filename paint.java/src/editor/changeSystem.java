@@ -1,5 +1,6 @@
 package editor;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import main.globals;
@@ -76,6 +77,7 @@ public class changeSystem {
 //		next();
 		
 	}
+	
 	
 	
 
