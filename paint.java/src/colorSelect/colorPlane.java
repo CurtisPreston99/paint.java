@@ -68,14 +68,16 @@ public class colorPlane extends SecondaryWindows {
 	}
 	
 	public void settings() {
-		size(390, 270 ,JAVA2D); 
 		Wheel=new colorWheel(this,140); 
+		size(390, 270 ,JAVA2D); 
 	}
 	
 	
 	public void setup() {
+
+
 		frameRate(15);
-		surface.setLocation(10, 10);
+		surface.setLocation(10, 50);
 		
 		//setting up gui
 		cp5=new ControlP5(this);

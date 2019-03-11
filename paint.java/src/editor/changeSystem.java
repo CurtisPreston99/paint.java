@@ -20,12 +20,13 @@ public class changeSystem {
 		current = i;
 		globals.getInstance().selectedImg=i;
 		updateGlobal();
+		
 	}
 	
 	
 	public void updateGlobal() {
 		globals.getInstance().selectedImg=current;
-		globals.getInstance().selectedlayer=current.getLayer();
+		globals.getInstance().selectedlayer=current.getLayer(globals.getInstance().selectedlayerN);
 
 	}
 	
@@ -67,6 +68,13 @@ public class changeSystem {
 	
 	public PGraphics getPic(PApplet c) {
 		return current.getPic(c);
+	}
+
+
+	public void addlayer() {
+		current.addLayer();
+//		next();
+		
 	}
 	
 	

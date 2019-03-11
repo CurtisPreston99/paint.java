@@ -8,7 +8,19 @@ public class layer {
 	int opacity=100;
 	PGraphics image;
 	globals global=globals.getInstance();
+	String layerName="";
 	
+	
+	public String getLayerName() {
+		return layerName;
+	}
+
+
+	public void setLayerName(String layerName) {
+		this.layerName = layerName;
+	}
+
+
 	public layer(int w,int h) {	
 //		PApplet p = global.window;
 		image= global.window.createGraphics(w, h);
