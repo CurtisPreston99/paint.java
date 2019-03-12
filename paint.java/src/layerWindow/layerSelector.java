@@ -15,6 +15,7 @@ import processing.event.MouseEvent;
 
 public class layerSelector extends SecondaryWindows{
 	int background = color(255,255,255);
+	int selected=color(100,100,255);
 	ControlP5 cp5;
 	int scroll=0;
 	public void settings() {
@@ -38,30 +39,34 @@ public class layerSelector extends SecondaryWindows{
 	
 	//draws list
 	public void draw() {
+		
 		onTopCheck();
 		ArrayList<layer> layers;
 		layers=globals.getInstance().selectedImage.current.layers;
 		layer[] shown= new layer[3];
-		
+		//gets shown layers
 		for(int i=scroll;i<scroll+3;i++) {
 			if(i>=layers.size()) {
 				break;
 			}
 			shown[i-scroll]=layers.get(i);
 		}
-		
+		//draw the list items
 		for (int l=0;l<shown.length;l++) {
 			if(shown[l]==null) {
 				break;
 			}
 			if(l+scroll==globals.getInstance().selectedlayerN) {
-				background = color(100,100,255);
+				int backTmp=background;
+				background = selected;
+				image(layerButton(shown[l]),0,(l*42)+20);
+				background=backTmp;
 			}else {
-				background = color(255,255,255);
+				image(layerButton(shown[l]),0,(l*42)+20);
 			}
-			image(layerButton(shown[l]),0,(l*42)+20);
 		}
 		
+		background = color(255,255,255);
 	}
 	
 	//converts layer to the a PGraphic
@@ -106,6 +111,7 @@ public class layerSelector extends SecondaryWindows{
 		globals.getInstance().selectedImage.current.lock();
 		globals.getInstance().selectedImage.addlayer();
 		globals.getInstance().selectedImage.current.unlock();
+		globals.getInstance().selectedImage.next();
 	}
 	
 	public void mousePressed() {
@@ -125,7 +131,9 @@ public class layerSelector extends SecondaryWindows{
 	public void mouseWheel(MouseEvent event) {
 		  float e = event.getCount();
 		  println(e);
-		  //todo
+		  if(scroll+e>0 && scroll+e<globals.getInstance().selectedImage.current.layers.size()) {
+			  scroll+=e;
+		  }
 		}
 	
 	//update global 
