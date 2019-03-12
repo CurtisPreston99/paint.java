@@ -18,14 +18,20 @@ public class toolSys {
 	}
 	
 	public void useTool(int x,int y) {
-		prevX=x;
-		prevY=y;
+		//get selected layer
 		layer sl=globals.getInstance().selectedImg.getLayer();
 //		globals.getInstance().selectedImg.=selected.click(x,y,globals.getInstance().selectedlayer);
 //		System.out.println("memes");
+		//draw onto layer
 		sl=selected.click(x,y,sl);
-		globals.getInstance().selectedImg.updateLayer(sl);
-		globals.getInstance().selectedImage.getSelectedImage().updateLayer(globals.getInstance().selectedlayer, globals.getInstance().selectedlayerN);
+		//update layer									at the layer in list			   the layer
+		globals.getInstance().selectedImg.updateLayer(globals.getInstance().selectedlayerN,sl);
+//		globals.getInstance().selectedImage.getSelectedImage().updateLayer(globals.getInstance().selectedlayer, globals.getInstance().selectedlayerN);
+		//set previous x/y
+		prevX=x;
+		prevY=y;
+				
+	
 	}
 	
 	public void dragTool(int x,int y) {

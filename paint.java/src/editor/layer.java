@@ -8,7 +8,29 @@ public class layer {
 	int opacity=100;
 	PGraphics image;
 	globals global=globals.getInstance();
+	String layerName="";
+	Boolean visible=true;
 	
+	public Boolean getVisible() {
+		return visible;
+	}
+
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
+
+
+	public String getLayerName() {
+		return layerName;
+	}
+
+
+	public void setLayerName(String layerName) {
+		this.layerName = layerName;
+	}
+
+
 	public layer(int w,int h) {	
 //		PApplet p = global.window;
 		image= global.window.createGraphics(w, h);
@@ -41,6 +63,7 @@ public class layer {
 		image.flush();
 		image.loadPixels();
 		layer cl=new layer(image.width,image.height);
+		cl.setLayerName(getLayerName());
 		PGraphics pg = global.window.createGraphics(image.width, image.height);
 
 		cl.getImage().loadPixels();

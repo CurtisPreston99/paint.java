@@ -1,6 +1,9 @@
 package main;
 
 
+import java.awt.FileDialog;
+import java.io.File;
+
 import colorSelect.colorPlane;
 import controlP5.FrameRate;
 import processing.core.PApplet;
@@ -31,17 +34,20 @@ public class main extends PApplet{
     	frameRate(10);
     	global.window=this;
     	String[] args= {"color"};
-    	PApplet.runSketch(args, new colorPlane());
-    	global.selectedColor=color(255,255,255);
+    	global.selectedColor=color(0,0,0);
     	global.secondaryColor=color(255,255,255);
 		surface.setResizable(true);
     	image=new changeSystem(640,480);
 		global.selectedlayerN=0;
 		global.selectedImage=image;
-    	PApplet.runSketch(args, new toolWindow());
-    	
+		PApplet.runSketch(args, new colorPlane());
+//		new toolWindow();
+    	PApplet.runSketch(args, new toolWindow());    	
     	PApplet.runSketch(args, new layerSelector());
     	
+
+    	image.next();
+
     	
     }
 
@@ -49,9 +55,7 @@ public class main extends PApplet{
     	global.SecondaryOnTop=focused;
     	
 //    	System.out.println(frameRate);
-    	background(global.selectedColor);
-    	fill(global.secondaryColor);
-    	ellipse(0,0,300,300);
+
     	image(globals.getInstance().selectedImg.getPic(this),130,130);
     	
     	if(mousePressed) {
@@ -72,18 +76,16 @@ public class main extends PApplet{
     	}
     }
     
-    
+    //if mouse pressed ramp up fps for smother drawing 
     public void mousePressed() {
-//    	image=new changeSystem(image);
     	frameRate(250);
-
     }
     
+    //turn of drag, start next in change system, slow down fps for battery saving
     public void mouseReleased() {
     	drag=false;
     	image.next();
     	frameRate(10);
-
     }
     
     
@@ -91,13 +93,22 @@ public class main extends PApplet{
     	System.out.println(key);
     	
     	switch (key) {
-    	case 'z':
+    	case '':
     		image.undo();
     		break;
     		
-    	case 'r':
+    	case '':
     		image.redo();
     		break;
+    	
+    	case 's':
+//    		image.getPic(this).save("saved.png");
+//    		saveCurrentPng();  todo
     	}
+    	
+    	
     }
+  
+    
+	
 }

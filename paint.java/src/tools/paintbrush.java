@@ -7,7 +7,7 @@ import processing.core.PConstants;
 
 public class paintbrush  extends tool{
 
-	int size=1;
+	int size=10;
 	PApplet can;
 	
 	
@@ -19,7 +19,7 @@ public class paintbrush  extends tool{
 	@Override
 	public layer click(int x, int y, layer l) {
 		l.getImage().beginDraw();
-		l.getImage().fill(globals.getInstance().selectedColor);
+		
 		l.getImage().strokeWeight(0);
 		l.getImage().ellipse(x, y, size, size);
 		l.getImage().endDraw();
@@ -31,12 +31,7 @@ public class paintbrush  extends tool{
 		l.getImage().beginDraw();
 		l.getImage().fill(globals.getInstance().selectedColor);
 		l.getImage().strokeWeight(size);
-		if(globals.getInstance().mouse==0) {
-		l.getImage().stroke(globals.getInstance().selectedColor);
-		}else {
-			l.getImage().stroke(globals.getInstance().secondaryColor);
-			
-		}
+		colorSelect(l);
 		l.getImage().line(x, y, xdif,ydif);
 		l.getImage().endDraw();
 		return l;
