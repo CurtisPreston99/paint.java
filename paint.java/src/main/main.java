@@ -7,6 +7,7 @@ import java.io.File;
 import colorSelect.colorPlane;
 import controlP5.FrameRate;
 import processing.core.PApplet;
+import saveSystem.saveSystem;
 import tools.toolSys;
 import tools.toolWindow;
 import processing.core.*;
@@ -102,8 +103,8 @@ public class main extends PApplet{
     		break;
     	
     	case 's':
-//    		image.getPic(this).save("saved.png");
-//    		saveCurrentPng();  todo
+    		saveSystem.saveFile(this);
+//    		saveSystem.saveFile();
     	}
     	
     	

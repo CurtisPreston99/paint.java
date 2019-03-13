@@ -92,7 +92,7 @@ public class colorPlane extends SecondaryWindows {
 		.setLabel("⤵")
 		.setValueLabel("⤵");
 		
-		
+				
 		//adding RGB sliders
 		cp5.addSlider("R")
 	     .setPosition(250,30)

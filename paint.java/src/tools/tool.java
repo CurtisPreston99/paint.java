@@ -13,6 +13,8 @@ public abstract class tool {
 	
 	abstract public layer drag(int x,int y,int xdif,int ydif,layer l);
 	
+	abstract public layer finnish(layer l);
+	
 	public PImage getIcon() {
 		return icon;
 	}

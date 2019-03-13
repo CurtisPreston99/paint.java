@@ -39,7 +39,7 @@ public class layerSelector extends SecondaryWindows{
 	
 	//draws list
 	public void draw() {
-		
+		background(background);
 		onTopCheck();
 		ArrayList<layer> layers;
 		layers=globals.getInstance().selectedImage.current.layers;
@@ -130,7 +130,7 @@ public class layerSelector extends SecondaryWindows{
 	
 	public void mouseWheel(MouseEvent event) {
 		  float e = event.getCount();
-		  println(e);
+//		  println(e);
 		  if(scroll+e>0 && scroll+e<globals.getInstance().selectedImage.current.layers.size()) {
 			  scroll+=e;
 		  }

@@ -37,4 +37,10 @@ public class paintbrush  extends tool{
 		return l;
 	}
 
+	@Override
+	public layer finnish(layer l) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

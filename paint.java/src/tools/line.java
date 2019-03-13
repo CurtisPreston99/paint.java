@@ -25,5 +25,10 @@ public class line extends tool {
 		l.getImage().line(x,y,xdif,ydif);
 		return l;
 	}
+	@Override
+	public layer finnish(layer l) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
