@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 
 public class image {
-	public ArrayList<layer> layers=new ArrayList<layer>();
+	volatile public ArrayList<layer> layers=new ArrayList<layer>();
 	int width;
 	int height;
 	public int selectedLayer=0;
@@ -36,12 +36,17 @@ public class image {
 	
 	
 	public void resize(int w, int h) {	
+		while(lck) {}
+		lck=true;
 		for(layer l:layers) {
 			l.resize(w, h);
 		}
+		lck=false;
 	}
 	
 	public void addLayer() {
+		while(lck) {}
+		lck=true;
 		layer l = new layer(width,height);
 		l.setLayerName("layer "+String.valueOf(layers.size()));
 		//make layer transparent rather than white
@@ -49,19 +54,25 @@ public class image {
 		l.getImage().background(0,0);
 		l.getImage().endDraw();
 		layers.add(l);
+		
+		lck=false;
 	}
 	
 	public void addLayer(layer l) {
+		while(lck) {}
+		lck=true;
 		layers.add(l);
+		lck=false;
 	}
 	
 	
 	public PGraphics getPic(PApplet c) {
 		PGraphics pic= globals.getInstance().window.createGraphics(width, height);
 		pic.beginDraw();
-		for(layer l:layers) {
-			if(l.visible) {
-				pic.image(l.image, 0, 0);
+		for(int e=0;e<layers.size();e++) {
+			if(layers.get(e).visible) {
+				pic.tint(255, (255*layers.get(e).getOpacity())/100); 
+				pic.image(layers.get(e).image, 0, 0);
 			}
 		}
 		pic.endDraw();
@@ -84,16 +95,20 @@ public class image {
 	}
 	
 	public void updateLayer(layer l,int i) {
+		while(lck) {}
+		lck=true;
+
 		if(i>layers.size()-1) {
 			layers.add(l);
 		}else {
 		layers.set(i, l);
 		}
+		lck=false;
 	}
 	
 	public layer getLayer() {
-		
 		return layers.get(selectedLayer);
+		
 	}
 	
 	public layer getLayer(int i) {
@@ -102,12 +117,20 @@ public class image {
 	}
 	
 	public void updateLayer(layer l) {
+		while(lck) {}
+		lck=true;
 		layers.set(selectedLayer, l);
+		lck=false;
+
 		
 	}
 	
 	public void updateLayer(int i,layer l) {
+		while(lck) {}
+		lck=true;
 		layers.set(i, l);
+		lck=false;
+
 		
 	}
 	//wait while image array is locked

@@ -2,22 +2,23 @@ package layerWindow;
 
 import java.util.ArrayList;
 
-import colorSelect.colorWheel;
-import controlP5.CColor;
-import controlP5.ColorWheel;
 import controlP5.ControlP5;
 import editor.layer;
 import main.SecondaryWindows;
 import main.globals;
+import processing.core.PApplet;
 import processing.core.PGraphics;
-import processing.core.PImage;
 import processing.event.MouseEvent;
+import tools.toolWindow;
 
 public class layerSelector extends SecondaryWindows{
 	int background = color(255,255,255);
 	int selected=color(100,100,255);
 	ControlP5 cp5;
 	int scroll=0;
+	layerPropitiesWindow prop;
+
+	
 	public void settings() {
 		size(128,128);
 	}
@@ -25,6 +26,11 @@ public class layerSelector extends SecondaryWindows{
 	
 	public void setup() {
 //		surface.setIcon(null);
+		prop=new layerPropitiesWindow();
+		String[] a= {"test"};
+		PApplet.runSketch(a, prop);   
+		prop.getSurface().setVisible(false);
+		prop.noLoop();
 		cp5=new ControlP5(this);
 
 		cp5.addButton("addlayer")
@@ -107,23 +113,28 @@ public class layerSelector extends SecondaryWindows{
 	}
 	
 	public void addlayer(int i) {
-		globals.getInstance().selectedImage.current.lockWait();
-		globals.getInstance().selectedImage.current.lock();
 		globals.getInstance().selectedImage.addlayer();
-		globals.getInstance().selectedImage.current.unlock();
-		globals.getInstance().selectedImage.next();
 	}
 	
 	public void mousePressed() {
 		
-		//selects new selected layer and updates globals
 		if(mouseY>20){
 			int y=((mouseY-20)/42)+scroll;
 			if(mouseButton == LEFT) {
+				//selects new selected layer and updates globals
 				updateLayerSelect(y);
 			}
 			if(mouseButton == RIGHT) {
+				 //opens layer properties window for laer right clicked
+				print("right button",y);
+				prop.layerN=y;
+				prop.loop();
+				prop.getSurface().setVisible(true);
 				
+				
+				
+//		    	globals.getInstance().selectedImage.current.layers;
+
 			}
 		}
 	}

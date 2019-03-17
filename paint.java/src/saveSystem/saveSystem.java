@@ -1,7 +1,6 @@
 package saveSystem;
 
 import java.awt.Component;
-import java.awt.Dialog;
 import java.awt.FileDialog;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -20,6 +19,8 @@ public class saveSystem {
 		chooser.setFileFilter(new OpenFileFilter("png","PNG image") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("jpeg","Photo in JPEG format") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("jpg","Photo in JPEG format") );
+		chooser.addChoosableFileFilter(new OpenFileFilter("tga","Photo in TARGA format") );
+		chooser.addChoosableFileFilter(new OpenFileFilter("tif","Photo in TIFF format") );		
 		int returnVal = chooser.showSaveDialog(new Component() {});
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 		     myFilename = chooser.getSelectedFile();

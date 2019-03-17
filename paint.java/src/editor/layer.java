@@ -6,10 +6,24 @@ import processing.core.PGraphics;
 
 public class layer {
 	int opacity=100;
-	PGraphics image;
+	
+
+	volatile PGraphics image;
 	globals global=globals.getInstance();
 	String layerName="";
 	Boolean visible=true;
+	
+	
+
+	public int getOpacity() {
+		return opacity;
+	}
+
+
+	public void setOpacity(int opacity) {
+		this.opacity = opacity;
+	}
+
 	
 	public Boolean getVisible() {
 		return visible;
@@ -65,10 +79,11 @@ public class layer {
 		layer cl=new layer(image.width,image.height);
 		cl.setLayerName(getLayerName());
 		PGraphics pg = global.window.createGraphics(image.width, image.height);
-
+		cl.setVisible(getVisible());
 		cl.getImage().loadPixels();
 		PApplet.arrayCopy(getImage().pixels, cl.getImage().pixels);
 		cl.getImage().updatePixels();
+		cl.setOpacity(getOpacity());
 		return cl;
 		
 	}

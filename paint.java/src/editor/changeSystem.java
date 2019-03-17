@@ -74,7 +74,7 @@ public class changeSystem {
 
 	public void addlayer() {
 		current.addLayer();
-//		next();
+		next();
 		
 	}
 	
