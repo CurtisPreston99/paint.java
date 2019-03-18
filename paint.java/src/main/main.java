@@ -3,7 +3,7 @@ package main;
 
 import colorSelect.colorPlane;
 import processing.core.PApplet;
-import saveSystem.saveSystem;
+import saveSystem.IOSystem;
 import tools.toolSys;
 import tools.toolWindow;
 import editor.changeSystem;
@@ -15,8 +15,7 @@ public class main extends PApplet{
 	changeSystem image;
 	
 	public static void main(String[] args) {
-		PApplet.main("main.main");
-		
+		main("main.main");
 	}
 	
 	public void settings(){
@@ -41,14 +40,14 @@ public class main extends PApplet{
     	PApplet.runSketch(args, new layerSelector());
     	
 
-    	image.next();
+    	globals.getInstance().selectedImage.next();
 
     	
     }
 
     public void draw(){
     	global.SecondaryOnTop=focused;
-    	
+    	background(0);
 //    	System.out.println(frameRate);
 
     	image(globals.getInstance().selectedImg.getPic(this),130,130);
@@ -79,7 +78,7 @@ public class main extends PApplet{
     //turn of drag, start next in change system, slow down fps for battery saving
     public void mouseReleased() {
     	drag=false;
-    	image.next();
+    	globals.getInstance().selectedImage.next();
     	frameRate(10);
     }
     
@@ -89,17 +88,22 @@ public class main extends PApplet{
     	
     	switch (key) {
     	case '':
-    		image.undo();
+    		globals.getInstance().selectedImage.undo();
     		break;
     		
     	case '':
-    		image.redo();
+    		globals.getInstance().selectedImage.redo();
     		break;
     	
     	case 's':
-    		saveSystem.saveFile();
-    	}
+    		IOSystem.saveFile();
+    		break;
     	
+    	
+    	case 'l':
+    		IOSystem.loadFile();
+    		break;
+    	}
     	
     }
   

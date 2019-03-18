@@ -5,10 +5,8 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 
 public class layer {
-	int opacity=100;
-	
-
 	volatile PGraphics image;
+	int opacity=100;
 	globals global=globals.getInstance();
 	String layerName="";
 	Boolean visible=true;
@@ -58,11 +56,7 @@ public class layer {
 	public layer(PGraphics img) {
 		
 		
-		image= global.window.createGraphics(img.width, img.height);
-		
-		image.beginDraw();
-		image.image(img, 0, 0);
-		image.endDraw();
+		image= img;
 	}
 	
 	
@@ -91,5 +85,9 @@ public class layer {
 
 	public PGraphics getImage() {
 		return image;
+	}
+	
+	public void setImage(PGraphics img) {
+		image=img;
 	}
 }

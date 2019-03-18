@@ -1,6 +1,5 @@
 package editor;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import main.globals;
@@ -17,6 +16,16 @@ public class changeSystem {
 		height=h;
 		width=w;
 		image i=new image(w,h);
+//		previous.add(i);
+		current = i;
+		globals.getInstance().selectedImg=i;
+		updateGlobal();
+	}
+	
+	public changeSystem(PGraphics p) {
+		height=p.height;
+		width=p.width;
+		image i=new image(width,height);
 //		previous.add(i);
 		current = i;
 		globals.getInstance().selectedImg=i;

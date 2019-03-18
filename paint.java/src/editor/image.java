@@ -23,6 +23,15 @@ public class image {
 		globals.getInstance().selectedlayer=layers.get(0);
 	}
 	
+	public image(PGraphics p){
+		
+		width=p.width;
+		height=p.height;
+		layer l=new layer(p);
+		layers.add(l);
+		globals.getInstance().selectedlayer=l;
+	}
+	
 	public image(image cp){
 		
 		width=cp.width;
