@@ -138,11 +138,10 @@ public class layerSelector extends SecondaryWindows{
 			}
 		}
 	}
-	
+	//scrolling the window
 	public void mouseWheel(MouseEvent event) {
 		  float e = event.getCount();
-//		  println(e);
-		  if(scroll+e>0 && scroll+e<globals.getInstance().selectedImage.current.layers.size()) {
+		  if(scroll+e>=0 && scroll+e<globals.getInstance().selectedImage.current.layers.size()) {
 			  scroll+=e;
 		  }
 		}

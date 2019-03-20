@@ -21,6 +21,7 @@ public class IOSystem {
 		File myFilename;
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new OpenFileFilter("png","PNG image") );
+		chooser.addChoosableFileFilter(new OpenFileFilter("pdj","paint.javas own format") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("jpeg","Photo in JPEG format") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("jpg","Photo in JPEG format") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("tga","Photo in TARGA format") );
@@ -30,12 +31,25 @@ public class IOSystem {
 		     myFilename = chooser.getSelectedFile();
 		     String ex=((OpenFileFilter) chooser.getFileFilter()).getFileEXT();
 		     String filepath=myFilename.getAbsolutePath();
-		     System.out.println(myFilename);
-		     
-		     System.out.println(filepath+"."+ex);
-		     globals.getInstance().selectedImage.current.getPic(globals.getInstance().window).save(filepath+"."+ex);		
+		     if(filepath.substring(filepath.length()-3,filepath.length())==ex) {
+		    	 saveFile(filepath);
+		     }else {
+		     saveFile(filepath+"."+ex);
+		     }
 		     }
 		
+	}
+	
+	private static void saveFile(String f) {
+		String ex=f.substring(f.length()-3,f.length());
+		System.out.println(ex);
+		if(ex.equals("pdj")) {
+			System.out.println("pdj true");
+			PDJsave.savePDJ(f);
+		}else {
+			 System.out.println("not pdj");
+		     globals.getInstance().selectedImage.current.getPic(globals.getInstance().window).save(f);	
+		}
 	}
 	
 	
@@ -73,6 +87,7 @@ public class IOSystem {
 	public static void loadFile() {
 		File myFilename;
 		JFileChooser chooser = new JFileChooser();
+		chooser.addChoosableFileFilter(new OpenFileFilter("pdj","paint.javas own format") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("png","PNG image"));
 		chooser.addChoosableFileFilter(new OpenFileFilter("jpeg","Photo in JPEG format") );
 		chooser.addChoosableFileFilter(new OpenFileFilter("jpg","Photo in JPEG format") );
@@ -92,25 +107,34 @@ public class IOSystem {
 	}
 	
 	//loads file from string
-	private static void loadfile(String s) {
-		PApplet p=globals.getInstance().window;
-		PImage img;
-		img = p.loadImage(s);
-		PGraphics grah=p.createGraphics(img.width, img.height) ;
-		grah.beginDraw();
-		grah.image(img,0,0);
-		grah.endDraw();
-		layer l = new layer(img.width,img.height);
-		l.setImage(grah);
-		
-		changeSystem nc=new changeSystem(img.width,img.height);
-		nc.current.updateLayer(l,0);
-		
-		globals.getInstance().selectedImage=nc;
-		globals.getInstance().selectedImg=nc.current;
-		globals.getInstance().selectedlayer=nc.current.getLayer();
-		globals.getInstance().selectedImage.next();
-		
+	private static void loadfile(String f) {
+		String ex=f.substring(f.length()-3,f.length());
+		System.out.println(ex);
+		if(ex.equals("pdj")) {
+			System.out.println("pdj true");
+			PDJload.loadPDJ(f);
+			
+			
+		}else {
+			System.out.println("not pdj");
+			PApplet p=globals.getInstance().window;
+			PImage img;
+			img = p.loadImage(f);
+			PGraphics grah=p.createGraphics(img.width, img.height) ;
+			grah.beginDraw();
+			grah.image(img,0,0);
+			grah.endDraw();
+			layer l = new layer(img.width,img.height);
+			l.setImage(grah);
+			
+			changeSystem nc=new changeSystem(img.width,img.height);
+			nc.current.updateLayer(l,0);
+			
+			globals.getInstance().selectedImage=nc;
+			globals.getInstance().selectedImg=nc.current;
+			globals.getInstance().selectedlayer=nc.current.getLayer();
+			globals.getInstance().selectedImage.next();
+		}
 	}
 	
 }

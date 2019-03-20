@@ -4,7 +4,7 @@ import main.globals;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 
-public class layer {
+public class layer{
 	volatile PGraphics image;
 	int opacity=100;
 	globals global=globals.getInstance();

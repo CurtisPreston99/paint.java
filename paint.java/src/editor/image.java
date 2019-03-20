@@ -6,7 +6,7 @@ import main.globals;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 
-public class image {
+public class image{
 	volatile public ArrayList<layer> layers=new ArrayList<layer>();
 	int width;
 	int height;
@@ -14,7 +14,6 @@ public class image {
 	Boolean lck=false;
 	
 	public image(int w,int h){
-//		layer one = new layer(w,h);
 		width=w;
 		height=h;
 		layer first=new layer(w, h);
@@ -45,7 +44,7 @@ public class image {
 	
 	
 	public void resize(int w, int h) {	
-		while(lck) {}
+		lockWait();
 		lck=true;
 		for(layer l:layers) {
 			l.resize(w, h);
@@ -53,8 +52,24 @@ public class image {
 		lck=false;
 	}
 	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 	public void addLayer() {
-		while(lck) {}
+		lockWait();
 		lck=true;
 		layer l = new layer(width,height);
 		l.setLayerName("layer "+String.valueOf(layers.size()));
@@ -68,7 +83,7 @@ public class image {
 	}
 	
 	public void addLayer(layer l) {
-		while(lck) {}
+		lockWait();
 		lck=true;
 		layers.add(l);
 		lck=false;
@@ -104,7 +119,7 @@ public class image {
 	}
 	
 	public void updateLayer(layer l,int i) {
-		while(lck) {}
+		lockWait();
 		lck=true;
 
 		if(i>layers.size()-1) {
@@ -126,7 +141,7 @@ public class image {
 	}
 	
 	public void updateLayer(layer l) {
-		while(lck) {}
+		lockWait();
 		lck=true;
 		layers.set(selectedLayer, l);
 		lck=false;
@@ -135,7 +150,7 @@ public class image {
 	}
 	
 	public void updateLayer(int i,layer l) {
-		while(lck) {}
+		lockWait();
 		lck=true;
 		layers.set(i, l);
 		lck=false;
