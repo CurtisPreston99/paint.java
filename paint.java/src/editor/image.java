@@ -1,17 +1,22 @@
 package editor;
 
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 import main.globals;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 
+
 public class image{
-	volatile public ArrayList<layer> layers=new ArrayList<layer>();
+	
+	public ArrayList<layer> layers=new ArrayList<layer>();
 	int width;
 	int height;
 	public int selectedLayer=0;
-	Boolean lck=false;
+
+	Semaphore s = new Semaphore(1);
+	
 	
 	public image(int w,int h){
 		width=w;
@@ -44,12 +49,11 @@ public class image{
 	
 	
 	public void resize(int w, int h) {	
-		lockWait();
-		lck=true;
+		lockget();
 		for(layer l:layers) {
 			l.resize(w, h);
 		}
-		lck=false;
+		realese();
 	}
 	
 	public int getWidth() {
@@ -69,8 +73,7 @@ public class image{
 	}
 
 	public void addLayer() {
-		lockWait();
-		lck=true;
+		lockget();
 		layer l = new layer(width,height);
 		l.setLayerName("layer "+String.valueOf(layers.size()));
 		//make layer transparent rather than white
@@ -78,15 +81,15 @@ public class image{
 		l.getImage().background(0,0);
 		l.getImage().endDraw();
 		layers.add(l);
+		realese();
 		
-		lck=false;
 	}
 	
 	public void addLayer(layer l) {
-		lockWait();
-		lck=true;
+		lockget();
 		layers.add(l);
-		lck=false;
+		realese();
+
 	}
 	
 	
@@ -97,6 +100,23 @@ public class image{
 			if(layers.get(e).visible) {
 				pic.tint(255, (255*layers.get(e).getOpacity())/100); 
 				pic.image(layers.get(e).image, 0, 0);
+			
+			}
+		}
+		pic.endDraw();
+		return pic;
+	}
+	
+	public PGraphics getPreview(PApplet c) {
+		PGraphics pic= globals.getInstance().window.createGraphics(width, height);
+		pic.beginDraw();
+		for(int e=0;e<layers.size();e++) {
+			if(layers.get(e).visible) {
+				pic.tint(255, (255*layers.get(e).getOpacity())/100); 
+				pic.image(layers.get(e).image, 0, 0);
+			}
+			if(e==globals.getInstance().selectedlayerN) {
+				pic.image(globals.getInstance().drawinglayer, 0, 0);
 			}
 		}
 		pic.endDraw();
@@ -119,15 +139,14 @@ public class image{
 	}
 	
 	public void updateLayer(layer l,int i) {
-		lockWait();
-		lck=true;
+		lockget();
 
 		if(i>layers.size()-1) {
 			layers.add(l);
 		}else {
 		layers.set(i, l);
 		}
-		lck=false;
+		realese();
 	}
 	
 	public layer getLayer() {
@@ -141,31 +160,27 @@ public class image{
 	}
 	
 	public void updateLayer(layer l) {
-		lockWait();
-		lck=true;
+		lockget();
 		layers.set(selectedLayer, l);
-		lck=false;
-
-		
+		realese();
 	}
 	
 	public void updateLayer(int i,layer l) {
-		lockWait();
-		lck=true;
+		lockget();
 		layers.set(i, l);
-		lck=false;
-
-		
+		realese();
 	}
 	//wait while image array is locked
-	public void lockWait() {
-		while(lck) {}
+	public void lockget() {
+		try {
+			s.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	//lock/unlock layers
-	public void lock() {
-		lck=true;
-	}
-	public void unlock() {
-		lck=false;
+	
+	public void realese() {
+		s.release();
 	}
 }

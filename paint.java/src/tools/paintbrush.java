@@ -4,6 +4,7 @@ import editor.layer;
 import main.globals;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PGraphics;
 
 public class paintbrush  extends tool{
 
@@ -17,30 +18,25 @@ public class paintbrush  extends tool{
 	}
 	
 	@Override
-	public layer click(int x, int y, layer l) {
-		l.getImage().beginDraw();
+	public void click(int x, int y, PGraphics l) { 
+		l.beginDraw();
 		
-		l.getImage().strokeWeight(0);
-		l.getImage().ellipse(x, y, size, size);
-		l.getImage().endDraw();
-		return l;
+		l.strokeWeight(0);
+		l.ellipse(x, y, size, size);
+		l.endDraw();
+		
 	}
 
 	@Override
-	public layer drag(int x, int y, int xdif, int ydif, layer l) {
-		l.getImage().beginDraw();
-		l.getImage().fill(globals.getInstance().selectedColor);
-		l.getImage().strokeWeight(size);
+	public void drag(int x, int y, int xdif, int ydif, PGraphics l) {
+		l.beginDraw();
+		l.fill(globals.getInstance().selectedColor);
+		l.strokeWeight(size);
 		colorSelect(l);
-		l.getImage().line(x, y, xdif,ydif);
-		l.getImage().endDraw();
-		return l;
+		l.line(x, y, xdif,ydif);
+		l.endDraw();
 	}
 
-	@Override
-	public layer finnish(layer l) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

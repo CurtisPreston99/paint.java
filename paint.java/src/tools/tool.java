@@ -2,6 +2,7 @@ package tools;
 
 import editor.layer;
 import main.globals;
+import processing.core.PGraphics;
 import processing.core.PImage;
 
 public abstract class tool {
@@ -9,25 +10,35 @@ public abstract class tool {
 	int color;
 	
 	
-	abstract public layer click(int x,int y,layer l);
+	abstract public void click(int x,int y,PGraphics drawinglayer);
 	
-	abstract public layer drag(int x,int y,int xdif,int ydif,layer l);
+	abstract public void drag(int x,int y,int xdif,int ydif,PGraphics drawinglayer);
 	
-	abstract public layer finnish(layer l);
+	public layer finnish(layer l) {
+		layer newl=l.clone();
+		PGraphics p=l.getImage();
+		p.beginDraw();
+		p.image(globals.getInstance().drawinglayer,0,0);
+		p.endDraw();
+		newl.setImage(p);
+		return newl;
+	};
 	
 	public PImage getIcon() {
 		return icon;
 	}
 	
-	public void colorSelect(layer L) {
+	public void colorSelect(PGraphics L) {
 		if(globals.getInstance().mouse==1) {
-		L.getImage().stroke(globals.getInstance().secondaryColor);
-		L.getImage().fill(globals.getInstance().secondaryColor);
+		L.stroke(globals.getInstance().secondaryColor);
+		L.fill(globals.getInstance().secondaryColor);
 		}else {
-		L.getImage().stroke(globals.getInstance().selectedColor);
-		L.getImage().fill(globals.getInstance().selectedColor);
+		L.stroke(globals.getInstance().selectedColor);
+		L.fill(globals.getInstance().selectedColor);
 		}
 	}
+
+
 	
 //	abstract controlP5 getcontrols();
 	

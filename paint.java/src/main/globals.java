@@ -4,6 +4,7 @@ import editor.changeSystem;
 import editor.image;
 import editor.layer;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 public class globals {
 	static globals singilton = new globals();
@@ -16,7 +17,7 @@ public class globals {
 	public int selectedlayerN;
 	public changeSystem selectedImage;
 	public int mouse=0;//left==0 right==1
-	
+	public PGraphics drawinglayer;
 	public float colorDistance(int a, int b) 
 	{
 	      float redDiff = window.red(a) - window.red(b);

@@ -3,6 +3,7 @@ package main;
 
 import colorSelect.colorPlane;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 import saveSystem.IOSystem;
 import tools.toolSys;
 import tools.toolWindow;
@@ -41,7 +42,11 @@ public class main extends PApplet{
     	
 
     	globals.getInstance().selectedImage.next();
-
+    	PGraphics p = createGraphics(image.current.getWidth(), image.current.getWidth());
+    	p.beginDraw();
+    	p.background(0, 0);
+    	global.drawinglayer=p;
+    	
     	
     }
 
@@ -50,7 +55,7 @@ public class main extends PApplet{
     	background(0);
 //    	System.out.println(frameRate);
 
-    	image(globals.getInstance().selectedImg.getPic(this),130,130);
+    	drawImage();
     	
     	if(mousePressed) {
     	if(mouseButton==LEFT) {
@@ -77,10 +82,31 @@ public class main extends PApplet{
     
     //turn of drag, start next in change system, slow down fps for battery saving
     public void mouseReleased() {
+    	toolSys.getSystem().finnish();
+    	newDrawingLayer();
     	drag=false;
     	globals.getInstance().selectedImage.next();
     	frameRate(10);
     }
+    
+    public void drawImage() {
+    	PGraphics pic=globals.getInstance().selectedImg.getPreview(this);
+    	pic.beginDraw();
+//    	pic.image();
+    	pic.endDraw();
+    	
+    	image(pic,130,130);
+//    	image();
+    }
+    
+    
+    public void newDrawingLayer() {
+    	PGraphics p = createGraphics(image.current.getWidth(), image.current.getWidth());
+    	p.beginDraw();
+    	p.background(0, 0);
+    	global.drawinglayer=p;
+    	}
+    	
     
     
     public void keyPressed(){

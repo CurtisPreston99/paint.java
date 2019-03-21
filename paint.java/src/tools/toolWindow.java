@@ -18,10 +18,8 @@ public class toolWindow extends SecondaryWindows{
 	
 	public void setup() {
 		surface.setAlwaysOnTop(true);
-		tools.add(new line(this));
-		tools.add(new pencil(this));
 		tools.add(new paintbrush(this));
-		System.selected=tools.get(2);
+		System.selected=tools.get(0);
 		
 //		System.currentlayer=globals.getInstance().selectedlayer;
 	}
@@ -29,7 +27,6 @@ public class toolWindow extends SecondaryWindows{
 	public void draw() {
 		onTopCheck();
 		image(tools.get(0).icon,0,0);
-		image(tools.get(1).icon,0,20);
 		
 	}
 
