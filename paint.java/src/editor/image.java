@@ -124,6 +124,7 @@ public class image{
 	}
 	
 	public image copy() {
+		lockget();
 		image i = new image(width,height);
 		
 //		for(layer l:layers) {
@@ -135,6 +136,7 @@ public class image{
 			tmp.image.endDraw();
 			i.layers.set(e, tmp);
 		}
+		realese();
 		return i;
 	}
 	
@@ -146,6 +148,23 @@ public class image{
 		}else {
 		layers.set(i, l);
 		}
+		realese();
+	}
+	
+	public void updateLayer(PGraphics p,int i) {
+		lockget();
+
+		if(i>layers.size()-1) {
+			layers.get(i).image=p;;
+		}
+		realese();
+	}
+	
+	public void updateLayer(PGraphics p) {
+		lockget();
+		PGraphics l=layers.get(globals.getInstance().selectedlayerN).image;
+		l.beginDraw();
+		l.image(p,0,0);
 		realese();
 	}
 	

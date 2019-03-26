@@ -42,15 +42,14 @@ public class main extends PApplet{
     	
 
     	globals.getInstance().selectedImage.next();
-    	PGraphics p = createGraphics(image.current.getWidth(), image.current.getWidth());
-    	p.beginDraw();
-    	p.background(0, 0);
-    	global.drawinglayer=p;
-    	
+    	newDrawingLayer();
     	
     }
 
     public void draw(){
+    	
+    	surface.setIcon(createGraphics(1, 1));
+
     	global.SecondaryOnTop=focused;
     	background(0);
 //    	System.out.println(frameRate);
@@ -82,6 +81,7 @@ public class main extends PApplet{
     
     //turn of drag, start next in change system, slow down fps for battery saving
     public void mouseReleased() {
+    	//finish drawing add tmp layer to selected layer 
     	toolSys.getSystem().finnish();
     	newDrawingLayer();
     	drag=false;
@@ -101,7 +101,7 @@ public class main extends PApplet{
     
     
     public void newDrawingLayer() {
-    	PGraphics p = createGraphics(image.current.getWidth(), image.current.getWidth());
+    	PGraphics p = createGraphics(image.current.getWidth(), image.current.getHeight());
     	p.beginDraw();
     	p.background(0, 0);
     	global.drawinglayer=p;

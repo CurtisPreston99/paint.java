@@ -46,7 +46,7 @@ public class toolSys {
 	
 	
 	public void finnish() {
-		globals.getInstance().selectedlayer=selected.finnish(globals.getInstance().selectedlayer);
+		selected.finnish();
 	}
 	
 	public void update() {

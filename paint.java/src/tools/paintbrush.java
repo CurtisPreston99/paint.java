@@ -8,14 +8,13 @@ import processing.core.PGraphics;
 
 public class paintbrush  extends tool{
 
-	int size=10;
-	PApplet can;
-	
-	
 	public paintbrush(PApplet c) {
-		can=c;
-		icon=c.createImage(20, 20,PConstants.RGB);
+		super(c);
+		// TODO Auto-generated constructor stub
 	}
+
+	int size=10;
+	
 	
 	@Override
 	public void click(int x, int y, PGraphics l) { 

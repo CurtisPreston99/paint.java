@@ -19,7 +19,8 @@ public class toolWindow extends SecondaryWindows{
 	public void setup() {
 		surface.setAlwaysOnTop(true);
 		tools.add(new paintbrush(this));
-		System.selected=tools.get(0);
+		tools.add(new squareTool(this));
+		System.selected=tools.get(1);
 		
 //		System.currentlayer=globals.getInstance().selectedlayer;
 	}

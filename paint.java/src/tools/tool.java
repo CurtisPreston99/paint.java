@@ -1,27 +1,30 @@
 package tools;
 
+import editor.image;
 import editor.layer;
 import main.globals;
+import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
 public abstract class tool {
 	PImage icon;
 	int color;
+	PApplet can;
 	
+	public tool(PApplet c) {
+		can=c;
+		icon=c.createImage(20, 20,PConstants.RGB);
+	}
 	
 	abstract public void click(int x,int y,PGraphics drawinglayer);
 	
 	abstract public void drag(int x,int y,int xdif,int ydif,PGraphics drawinglayer);
 	
-	public layer finnish(layer l) {
-		layer newl=l.clone();
-		PGraphics p=l.getImage();
-		p.beginDraw();
-		p.image(globals.getInstance().drawinglayer,0,0);
-		p.endDraw();
-		newl.setImage(p);
-		return newl;
+	public void finnish() {
+		image i=globals.getInstance().selectedImg;
+		i.updateLayer(globals.getInstance().drawinglayer);
 	};
 	
 	public PImage getIcon() {
