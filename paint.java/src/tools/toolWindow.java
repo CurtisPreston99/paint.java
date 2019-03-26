@@ -20,7 +20,8 @@ public class toolWindow extends SecondaryWindows{
 		surface.setAlwaysOnTop(true);
 		tools.add(new paintbrush(this));
 		tools.add(new squareTool(this));
-		System.selected=tools.get(1);
+		tools.add(new circleTool(this));
+		System.selected=tools.get(2);
 		
 //		System.currentlayer=globals.getInstance().selectedlayer;
 	}
