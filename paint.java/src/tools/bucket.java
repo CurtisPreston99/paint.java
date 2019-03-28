@@ -28,6 +28,8 @@ public class bucket  extends tool{
 	
 	@Override
 	public void click(int x, int y, PGraphics l) {
+		long startTime =System.nanoTime();
+		System.out.println("bucket start");
 		globals.getInstance().selectedImg.lockget();
 		l.point(x,y);
 		PGraphics layer=globals.getInstance().selectedlayer.getImage();
@@ -49,9 +51,10 @@ public class bucket  extends tool{
 			toCheck.remove(toCheck.size()-1);
 			checkedPoints.add(p);
 			
+			//checks point
 			if(layer.get(p.x,p.y)==prevC) {
 				tocolor.add(p);
-				
+				//
 				
 				if(!containsPOINT(checkedPoints,new myPoint(p.x+1, p.y))){
 				toCheck.add(new myPoint(p.x+1, p.y));
@@ -74,6 +77,7 @@ public class bucket  extends tool{
 		}
 		
 		l.loadPixels();
+		//coloring in the pixes 
 		for(myPoint p:tocolor) {
 //			l.set(p.x,p.y,newC);
 			
@@ -81,6 +85,11 @@ public class bucket  extends tool{
 		}
 		l.updatePixels();
 		globals.getInstance().selectedImg.realese();
+		long timeElapsed = System.nanoTime() - startTime;
+		System.out.println("Execution time in nanoseconds  : " + timeElapsed);
+		System.out.println("Execution time in milliseconds : " + timeElapsed / 1000000);
+		System.out.println("Execution time in seconds : " + (timeElapsed / 1000000)/1000);
+		System.out.println("for "+tocolor.size()+" pixels");
 	}
 	
 	public boolean containsPOINT(ArrayList<myPoint> i,myPoint p) {
