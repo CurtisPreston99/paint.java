@@ -1,7 +1,6 @@
 package tools;
 
 import editor.image;
-import editor.layer;
 import main.globals;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -12,10 +11,14 @@ public abstract class tool {
 	PImage icon;
 	int color;
 	PApplet can;
-	
+	String name;
 	public tool(PApplet c) {
 		can=c;
-		icon=c.createImage(20, 20,PConstants.RGB);
+		icon=c.createImage(16, 16,PConstants.RGB);
+	}
+	
+	public int getIndex(int width,int x,int y) {
+		return width * y + x;
 	}
 	
 	abstract public void click(int x,int y,PGraphics drawinglayer);

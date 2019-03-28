@@ -7,8 +7,8 @@ public class squareTool extends tool {
 	public squareTool(PApplet c) {
 		super(c);
 		// TODO Auto-generated constructor stub
+		name = "square tool";
 	}
-
 	int sx,sy=0;
 	@Override
 	public void click(int x, int y, PGraphics drawinglayer) {

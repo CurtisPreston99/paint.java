@@ -11,8 +11,8 @@ public class paintbrush  extends tool{
 	public paintbrush(PApplet c) {
 		super(c);
 		// TODO Auto-generated constructor stub
+		name="paintbrush";
 	}
-
 	int size=10;
 	
 	
