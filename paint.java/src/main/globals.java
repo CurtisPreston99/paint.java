@@ -18,6 +18,7 @@ public class globals {
 	public changeSystem selectedImage;
 	public int mouse=0;//left==0 right==1
 	public PGraphics drawinglayer;
+	
 	public float colorDistance(int a, int b) 
 	{
 	      float redDiff = window.red(a) - window.red(b);
@@ -26,6 +27,13 @@ public class globals {
 
 	      return window.sqrt( window.sq(redDiff) + window.sq(grnDiff) + window.sq(bluDiff) );
 	}
+	
+	public void newDrawingLayer() {
+    	PGraphics p = window.createGraphics(selectedImage.current.getWidth(), selectedImage.current.getHeight());
+    	p.beginDraw();
+    	p.background(0, 0);
+    	drawinglayer=p;
+    	}
 	
 	static public globals getInstance() {
 		

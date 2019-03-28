@@ -83,7 +83,7 @@ public class main extends PApplet{
     public void mouseReleased() {
     	//finish drawing add tmp layer to selected layer 
     	toolSys.getSystem().finnish();
-    	newDrawingLayer();
+    	global.newDrawingLayer();
     	drag=false;
     	globals.getInstance().selectedImage.next();
     	frameRate(10);

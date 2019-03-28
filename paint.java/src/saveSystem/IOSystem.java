@@ -135,6 +135,7 @@ public class IOSystem {
 			globals.getInstance().selectedlayer=nc.current.getLayer();
 			globals.getInstance().selectedImage.next();
 		}
+		globals.getInstance().newDrawingLayer();
 	}
 	
 }
