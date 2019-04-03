@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.TreeSet;
 
 import editor.layer;
 import main.globals;
@@ -28,6 +29,7 @@ public class bucket  extends tool{
 	
 	@Override
 	public void click(int x, int y, PGraphics l) {
+		int colored=0;
 		long startTime =System.nanoTime();
 		System.out.println("bucket start");
 		globals.getInstance().selectedImg.lockget();
@@ -35,12 +37,14 @@ public class bucket  extends tool{
 		PGraphics layer=globals.getInstance().selectedlayer.getImage();
 		int prevC=layer.get(x, y);
 		int newC=globals.getInstance().selectedColor;
-		ArrayList<myPoint> tocolor=new ArrayList<myPoint>();
-		ArrayList<myPoint> checkedPoints=new ArrayList<myPoint>();
+		TreeSet<myPoint> checkedPoints=new TreeSet<myPoint>();
 		ArrayList<myPoint> toCheck=new ArrayList<myPoint>();
+		TreeSet<myPoint> t=new TreeSet<myPoint>();
+		t.add(new myPoint(x,y));
 		toCheck.add(new myPoint(x,y));
 		int count=0;
 		if(layer.get(x, y)!=newC) {
+			l.loadPixels();
 		while(!toCheck.isEmpty()) {
 			count++;
 //			System.out.println(count);
@@ -53,7 +57,8 @@ public class bucket  extends tool{
 			
 			//checks point
 			if(layer.get(p.x,p.y)==prevC) {
-				tocolor.add(p);
+				l.pixels[getIndex(l.width, p.x, p.y)]=newC;
+				colored++;
 				//
 				
 				if(!containsPOINT(checkedPoints,new myPoint(p.x+1, p.y))){
@@ -74,49 +79,52 @@ public class bucket  extends tool{
 			}
 			
 		}
+		l.updatePixels();
 		}
 		
-		l.loadPixels();
-		//coloring in the pixes 
-		for(myPoint p:tocolor) {
-//			l.set(p.x,p.y,newC);
-			
-			l.pixels[getIndex(l.width, p.x, p.y)]=newC;
-		}
-		l.updatePixels();
+		
 		globals.getInstance().selectedImg.realese();
 		long timeElapsed = System.nanoTime() - startTime;
 		System.out.println("Execution time in nanoseconds  : " + timeElapsed);
 		System.out.println("Execution time in milliseconds : " + timeElapsed / 1000000);
 		System.out.println("Execution time in seconds : " + (timeElapsed / 1000000)/1000);
-		System.out.println("for "+tocolor.size()+" pixels");
+		System.out.println("for "+colored+" pixels");
 	}
 	
-	public boolean containsPOINT(ArrayList<myPoint> i,myPoint p) {
-		  for(myPoint e : i) {
-			  if(e.equals(p)) {
-				  return true;
-			  }
-		  }
-		  return false;
-	  
+	public boolean containsPOINT(TreeSet<myPoint> i,myPoint p) {
+		  return i.contains(p);
 	}
 
-	class myPoint {
-		  int x;
-		  int y;
-
-		  myPoint(int a, int b) {
-		    x=a;
-		    y=b;
-		  }
-		  
-		  
-		  
-		  boolean equals(myPoint other) {
-		    return(x==other.x && y==other.y);
-		  }
+	public class myPoint implements Comparable<myPoint> {
+		@Override
+		public String toString() {
+			return "myPoint [x=" + x + ", y=" + y + "]";
 		}
+
+		public int x;
+		public int y;
+
+		public myPoint(int a, int b) {
+			x = a;
+			y = b;
+		}
+
+		boolean equals(myPoint other) {
+			return (x == other.x && y == other.y);
+		}
+
+		@Override
+		public int compareTo(myPoint p) {
+			if (p.x != this.x) {
+				return p.x - x;
+			}
+			if (p.y != this.y) {
+				return p.y - y;
+			}
+
+			return 0;
+		}
+	}
 
 
 	@Override

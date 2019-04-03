@@ -1,5 +1,8 @@
 package tools;
 
+import java.util.ArrayList;
+
+import main.globals;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
@@ -22,10 +25,13 @@ public class circleTool extends tool {
 	@Override
 	public void drag(int x, int y, int xdif, int ydif, PGraphics drawinglayer) {
 		drawinglayer.beginDraw();
+//		drawinglayer.strokeWeight(width);
+		
+		int rx=sx-xdif;
+		int ry=sy-ydif;
 		drawinglayer.background(0,0);
-		drawinglayer.ellipseMode(PConstants.CORNER);
-		drawinglayer.strokeWeight(width);
-		drawinglayer.ellipse(sx, sy, xdif-sx, ydif-sy);
+		drawinglayer.ellipseMode(drawinglayer.CORNER);
+		drawinglayer.ellipse(sx-rx, sy-ry, rx, ry);
 		drawinglayer.endDraw();
 	}
 
