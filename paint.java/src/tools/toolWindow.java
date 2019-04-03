@@ -23,7 +23,8 @@ public class toolWindow extends SecondaryWindows{
 		tools.add(new circleTool(this));
 		tools.add(new lineTool(this));
 		tools.add(new bucket(this));
-		System.selected=tools.get(3);
+		tools.add(new colorSelect(this));
+		System.selected=tools.get(0);
 		
 //		System.currentlayer=globals.getInstance().selectedlayer;
 	}
