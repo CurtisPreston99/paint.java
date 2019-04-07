@@ -129,7 +129,11 @@ public class main extends PApplet{
     	case 'l':
     		IOSystem.loadFile();
     		break;
-    	}
+    	
+    	case '': 
+    		key = 0; 
+    		break;
+      }
     	
     }
   
