@@ -38,21 +38,16 @@ public class bucket  extends tool{
 		int prevC=layer.get(x, y);
 		int newC=globals.getInstance().selectedColor;
 		TreeSet<myPoint> checkedPoints=new TreeSet<myPoint>();
-		ArrayList<myPoint> toCheck=new ArrayList<myPoint>();
-		TreeSet<myPoint> t=new TreeSet<myPoint>();
-		t.add(new myPoint(x,y));
+		TreeSet<myPoint> toCheck=new TreeSet<myPoint>();
 		toCheck.add(new myPoint(x,y));
 		int count=0;
 		if(layer.get(x, y)!=newC) {
 			l.loadPixels();
 		while(!toCheck.isEmpty()) {
 			count++;
-//			System.out.println(count);
-//			System.out.println(toCheck.size());
-//			System.out.println("-------------");
 			
-			myPoint p=toCheck.get(toCheck.size()-1);
-			toCheck.remove(toCheck.size()-1);
+			myPoint p=toCheck.last();
+			toCheck.remove(p);
 			checkedPoints.add(p);
 			
 			//checks point
@@ -95,36 +90,7 @@ public class bucket  extends tool{
 		  return i.contains(p);
 	}
 
-	public class myPoint implements Comparable<myPoint> {
-		@Override
-		public String toString() {
-			return "myPoint [x=" + x + ", y=" + y + "]";
-		}
-
-		public int x;
-		public int y;
-
-		public myPoint(int a, int b) {
-			x = a;
-			y = b;
-		}
-
-		boolean equals(myPoint other) {
-			return (x == other.x && y == other.y);
-		}
-
-		@Override
-		public int compareTo(myPoint p) {
-			if (p.x != this.x) {
-				return p.x - x;
-			}
-			if (p.y != this.y) {
-				return p.y - y;
-			}
-
-			return 0;
-		}
-	}
+	
 
 
 	@Override
