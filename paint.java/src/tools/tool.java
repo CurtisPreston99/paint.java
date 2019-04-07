@@ -1,6 +1,7 @@
 package tools;
 
 import editor.image;
+import editor.layer;
 import main.globals;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -23,12 +24,6 @@ public abstract class tool {
 	  float r = can.red(c1);
 	  float g = can.green(c1);
 	  float b = can.blue(c1);
-//	  System.out.print(r);
-//	  System.out.print("|");
-//	  System.out.print(g);
-//	  System.out.print("|");
-//	  System.out.print(b);
-//	  return Math.sqrt((int(((512+rmean)*r*r))>>8)+(4*g*g)+(int(((767-rmean)*b*b))>>8));
 	  double d=Math.sqrt(Math.pow(r, 2)+Math.pow(g,2)+Math.pow(b,2));
 	  double p=d/Math.sqrt(Math.pow(255, 2)*3);
 	  return (float) p*100;
@@ -43,7 +38,15 @@ public abstract class tool {
 	abstract public void drag(int x,int y,int xdif,int ydif,PGraphics drawinglayer);
 	
 	public void finnish() {
+		
 		image i=globals.getInstance().selectedImg;
+		i.lockget();
+		PGraphics s=globals.getInstance().drawinglayer;
+		PGraphics l=i.getLayer().getImage();
+		
+		l.beginDraw();
+		l.image(s,0,0);
+		i.realese();
 		i.updateLayer(globals.getInstance().drawinglayer);
 	};
 	

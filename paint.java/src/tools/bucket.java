@@ -15,7 +15,7 @@ import processing.core.PGraphics;
 public class bucket  extends tool{
 	
 	
-	
+	int dif=99;
 
 	public bucket(PApplet c) {
 		super(c);
@@ -51,7 +51,7 @@ public class bucket  extends tool{
 			checkedPoints.add(p);
 			
 			//checks point
-			if(layer.get(p.x,p.y)==prevC) {
+			if(colorDif(layer.get(p.x,p.y),prevC)>dif) {
 				l.pixels[getIndex(l.width, p.x, p.y)]=newC;
 				colored++;
 				//
