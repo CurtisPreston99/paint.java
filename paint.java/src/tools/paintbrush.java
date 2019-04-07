@@ -18,6 +18,7 @@ public class paintbrush  extends tool{
 	
 	@Override
 	public void click(int x, int y, PGraphics l) { 
+		colorSelect(l);
 		l.beginDraw();
 		
 		l.strokeWeight(0);
