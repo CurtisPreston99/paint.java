@@ -17,6 +17,23 @@ public abstract class tool {
 		icon=c.createImage(16, 16,PConstants.RGB);
 	}
 	
+	float colorDif(int c1, int c2)
+	{
+	  float rmean =(can.red(c1) + can.red(c2)) / 2;
+	  float r = can.red(c1);
+	  float g = can.green(c1);
+	  float b = can.blue(c1);
+//	  System.out.print(r);
+//	  System.out.print("|");
+//	  System.out.print(g);
+//	  System.out.print("|");
+//	  System.out.print(b);
+//	  return Math.sqrt((int(((512+rmean)*r*r))>>8)+(4*g*g)+(int(((767-rmean)*b*b))>>8));
+	  double d=Math.sqrt(Math.pow(r, 2)+Math.pow(g,2)+Math.pow(b,2));
+	  double p=d/Math.sqrt(Math.pow(255, 2)*3);
+	  return (float) p*100;
+	} // colorDist()
+	
 	public int getIndex(int width,int x,int y) {
 		return width * y + x;
 	}
