@@ -162,9 +162,8 @@ public class image{
 	
 	public void updateLayer(PGraphics p) {
 		lockget();
-		PGraphics l=layers.get(globals.getInstance().selectedlayerN).image;
-		l.beginDraw();
-		l.image(p,0,0);
+		layers.get(globals.getInstance().selectedlayerN).image=p;;
+		
 		realese();
 	}
 	
