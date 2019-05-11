@@ -20,14 +20,28 @@ public abstract class tool {
 	
 	float colorDif(int c1, int c2)
 	{
-	  float rmean =(can.red(c1) + can.red(c2)) / 2;
-	  float r = can.red(c1);
-	  float g = can.green(c1);
-	  float b = can.blue(c1);
-	  double d=Math.sqrt(Math.pow(r, 2)+Math.pow(g,2)+Math.pow(b,2));
-	  double p=d/Math.sqrt(Math.pow(255, 2)*3);
-	  return (float) p*100;
+		return colorDif(c1,c2,false);
 	} // colorDist()
+	
+	float colorDif(int c1, int c2,boolean error)
+	{
+	  //color difference using Euclidean distance with RGB being the 3 dimensions 
+	  double difRed = can.red(c1)-can.red(c2);
+	  double difGreen = can.green(c1)-can.green(c2);
+	  double difBlue = can.blue(c1)-can.blue(c2);
+	  double TotalDif=Math.sqrt(Math.pow(difRed, 2)+Math.pow(difGreen,2)+Math.pow(difBlue,2));
+	  double percentageDifference=(TotalDif/Math.sqrt(Math.pow(255, 2)*3))*100;
+	  if(error) {
+		  System.out.println(c1);
+		  System.out.println(c2);
+		  System.out.println(difRed);
+		  System.out.println(difGreen);
+		  System.out.println(difBlue);
+		  System.out.println(TotalDif);
+		  System.out.println(percentageDifference);
+	  }
+	  return (float) percentageDifference;
+	}
 	
 	public int getIndex(int width,int x,int y) {
 		return width * y + x;

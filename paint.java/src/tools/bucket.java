@@ -1,21 +1,16 @@
 package tools;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+
 import java.util.TreeSet;
 
-import editor.layer;
 import main.globals;
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PGraphics;
 
 public class bucket  extends tool{
 	
 	
-	int dif=99;
+	int dif=80;
 
 	public bucket(PApplet c) {
 		super(c);
@@ -32,7 +27,6 @@ public class bucket  extends tool{
 		int colored=0;
 		long startTime =System.nanoTime();
 		System.out.println("bucket start");
-		globals.getInstance().selectedImg.lockget();
 		l.point(x,y);
 		PGraphics layer=globals.getInstance().selectedlayer.getImage();
 		int prevC=layer.get(x, y);
@@ -50,12 +44,18 @@ public class bucket  extends tool{
 			toCheck.remove(p);
 			checkedPoints.add(p);
 			
-			//checks point
-			if(colorDif(layer.get(p.x,p.y),prevC)>dif) {
+				//makes sure the point is in the picture so we dont get errors latter on 
+			if(p.x>=0 && p.x<layer.width && p.y>=0 && p.y< layer.height) {
+				
+				
+				//checks point
+			if(colorDif(layer.get(p.x,p.y),prevC)<dif) {
 				l.pixels[getIndex(l.width, p.x, p.y)]=newC;
 				colored++;
-				//
 				
+				myPoint c;
+				
+				//NOTE: this adds point that are not in the picture to the list eg x:0 y:-1
 				if(!containsPOINT(checkedPoints,new myPoint(p.x+1, p.y))){
 				toCheck.add(new myPoint(p.x+1, p.y));
 				}
@@ -68,7 +68,7 @@ public class bucket  extends tool{
 				if(!containsPOINT(checkedPoints,new myPoint(p.x, p.y-1))){
 					toCheck.add(new myPoint(p.x, p.y-1));
 					}
-				
+			}
 				
 				
 			}
@@ -78,13 +78,13 @@ public class bucket  extends tool{
 		}
 		
 		
-		globals.getInstance().selectedImg.realese();
 		long timeElapsed = System.nanoTime() - startTime;
 		System.out.println("Execution time in nanoseconds  : " + timeElapsed);
 		System.out.println("Execution time in milliseconds : " + timeElapsed / 1000000);
 		System.out.println("Execution time in seconds : " + (timeElapsed / 1000000)/1000);
 		System.out.println("for "+colored+" pixels");
-	}
+		System.out.println("and "+count+" cycles");
+	}	
 	
 	public boolean containsPOINT(TreeSet<myPoint> i,myPoint p) {
 		  return i.contains(p);
@@ -95,6 +95,7 @@ public class bucket  extends tool{
 
 	@Override
 	public void drag(int x, int y, int xdif, int ydif, PGraphics l) {
+		
 	}
 
 }

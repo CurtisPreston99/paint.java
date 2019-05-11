@@ -24,6 +24,7 @@ public class toolWindow extends SecondaryWindows{
 		tools.add(new lineTool(this));
 		tools.add(new bucket(this));
 		tools.add(new colorSelect(this));
+		tools.add(new colorDif(this));
 		System.selected=tools.get(0);
 		
 //		System.currentlayer=globals.getInstance().selectedlayer;

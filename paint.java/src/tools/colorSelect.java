@@ -15,6 +15,7 @@ public class colorSelect  extends tool{
 	@Override
 	public void click(int x, int y, PGraphics drawinglayer) {
 		int color=globals.getInstance().selectedlayer.getImage().pixels[getIndex(drawinglayer.width, x, y)];
+		System.out.println(color);
 		if(globals.getInstance().mouse==0) {
 		globals.getInstance().selectedColor=color;
 		}else {
