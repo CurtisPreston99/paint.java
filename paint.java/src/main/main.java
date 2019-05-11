@@ -1,6 +1,8 @@
 package main;
 
 
+import java.util.Set;
+
 import colorSelect.colorPlane;
 import processing.core.PApplet;
 import processing.core.PGraphics;
@@ -51,6 +53,12 @@ public class main extends PApplet{
     	surface.setIcon(createGraphics(1, 1));
 
     	global.SecondaryOnTop=focused;
+    	if(!focused) {
+    		Set<Integer> i =keys.getKeys().keyCheck.keySet();
+    		for(Integer e:i) {
+    			keys.getKeys().setkey(e, false);
+    		}
+    	}
     	background(0);
 //    	System.out.println(frameRate);
 
@@ -107,11 +115,16 @@ public class main extends PApplet{
     	global.drawinglayer=p;
     	}
     	
-    
+    public void keyReleased() {
+    	keys.getKeys().setkey(keyCode, false);
+    }
     
     public void keyPressed(){
     	System.out.println(key);
-    	
+    	System.out.println(keys.getKeys().getkey(keyCode));
+    	keys.getKeys().setkey(keyCode, true);
+    	System.out.println(keys.getKeys().getkey(keyCode));
+    	System.out.println(keyCode);
     	switch (key) {
     	case '':
     		globals.getInstance().selectedImage.undo();
