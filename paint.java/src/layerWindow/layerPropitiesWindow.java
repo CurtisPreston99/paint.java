@@ -8,21 +8,27 @@ import controlP5.Textfield;
 
 public class layerPropitiesWindow extends SecondaryWindows {
 	public int layerN;
-	layer layer;
+	layer layer=globals.getInstance().selectedImage.current.getLayer();
 	ControlP5 cp5;
 	
 	
 	int opacity;
 	String layerName;
-	boolean visable;
+	boolean visable=false;
 	
 	public void settings() {
 		size(200,128);
 		layer=globals.getInstance().selectedImage.current.getLayer(layerN);
 		opacity=layer.getOpacity();
 		layerName=layer.getLayerName();
-		visable=layer.getVisible();
 	}
+	
+	public void reOpen(int N) {
+		layer=globals.getInstance().selectedImage.current.getLayer(N);
+		opacity=layer.getOpacity();
+		layerName=layer.getLayerName();
+	}
+	
 	
 	public void setup() {
 		
@@ -76,23 +82,32 @@ public class layerPropitiesWindow extends SecondaryWindows {
 	
 	public void visable(int i) {
 		visable=!visable;
+		Update();
 	}
 	
 	public void layerName(String i) {
 		layerName=i;
-		print(i);
+		Update();
 	}
 	
 	public void opacity(int i) {
 		opacity=i;
+		Update();
 		
 	}
 	
 	public void updateL(int N) {
 		layerN=N;
+		Update();
 	}
 	
 	public void save(int i) {
+		Update();
+		surface.setVisible(false);
+//		dispose();
+	}
+	
+	public void Update() {
 		println(layerN);
 		layer = globals.getInstance().selectedImage.current.getLayer(layerN);
 		Textfield t=(Textfield) cp5.get("layerName");
@@ -102,8 +117,7 @@ public class layerPropitiesWindow extends SecondaryWindows {
 		layer.setOpacity(opacity);
 		layer.setVisible(visable);
 		
-		surface.setVisible(false);
-//		dispose();
+		
 	}
 
 }

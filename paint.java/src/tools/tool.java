@@ -54,13 +54,13 @@ public abstract class tool {
 	public void finnish() {
 		
 		image i=globals.getInstance().selectedImg;
-//		i.lockget();
+		i.lockget();
 		PGraphics s=globals.getInstance().drawinglayer;
 		PGraphics l=i.getLayer().getImage();
 		
 		l.beginDraw();
 		l.image(s,0,0);
-//		i.realese();
+		i.realese();
 		i.updateLayer(l);
 	};
 	

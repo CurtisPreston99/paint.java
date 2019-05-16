@@ -125,11 +125,11 @@ public class layerSelector extends SecondaryWindows{
 				updateLayerSelect(y);
 			}
 			if(mouseButton == RIGHT) {
-				 //opens layer properties window for laer right clicked
+				 //opens layer properties window for layer right clicked
 				print("right button",y);
 				prop.layerN=y;
-				prop.loop();
 				prop.getSurface().setVisible(true);
+
 				
 				
 				
