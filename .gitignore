@@ -4,7 +4,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+
 *.war
 *.ear
 
@@ -69,12 +69,3 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-paint\.java/lineCount\.sh
-
-paint\.java/lines\.csv
-
-paint\.java/lineCount\.py
-
-bullet/
-
-paint\.java/line\.csv
